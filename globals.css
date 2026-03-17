@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-neutral-950 text-neutral-50 antialiased;
+}
+
+body {
+  @apply min-h-screen;
+}
+
+a {
+  @apply text-brand-400 hover:text-brand-300 transition-colors;
+}
+
+input,
+textarea,
+select {
+  @apply bg-neutral-900 border border-neutral-700 rounded-md px-3 py-2 text-sm text-neutral-50 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent;
+}
+
+button {
+  @apply font-medium;
+}

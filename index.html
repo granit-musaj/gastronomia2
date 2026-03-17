@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="sq">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Website modern për restorant me menu, porosi online, rezervime, galeri, kontakt dhe panel administrimi."
+    />
+    <title>Gastronomia — Restorant</title>
+
+    <!-- Tailwind CDN (punon pa Node.js) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#fdf7f3",
+                100: "#f7e5d6",
+                200: "#f0c9aa",
+                300: "#e8a77a",
+                400: "#e18954",
+                500: "#d46a2a",
+                600: "#b75220",
+                700: "#913c1c",
+                800: "#6a2c18",
+                900: "#4f2114"
+              }
+            }
+          }
+        }
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      .glass {
+        background: rgba(10, 10, 10, 0.55);
+        backdrop-filter: blur(14px);
+      }
+      input,
+      textarea,
+      select {
+        color: #d6d3d3;
+        background: #494848;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #6b7280; /* neutral-500 */
+      }
+      .mobileDrawerOpen {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="bg-neutral-950 text-neutral-50 antialiased">
+    <header class="sticky top-0 z-50 border-b border-neutral-800/80 glass">
+      <div
+        class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3"
+      >
+        <a href="#home" class="flex items-center gap-2">
+          <span class="text-lg font-semibold tracking-[0.25em] uppercase"
+            >Gastronomia</span
+          >
+        </a>
+
+        <nav class="hidden items-center gap-6 text-sm md:flex">
+          <a class="text-neutral-300 hover:text-brand-300" href="#menu">Menu</a>
+          <a class="text-neutral-300 hover:text-brand-300" href="#order"
+            >Porosi</a
+          >
+          <a class="text-neutral-300 hover:text-brand-300" href="#services"
+            >Shërbime</a
+          >
+          <a class="text-neutral-300 hover:text-brand-300" href="#about"
+            >Rreth Nesh</a
+          >
+          <a class="text-neutral-300 hover:text-brand-300" href="#gallery"
+            >Galeri</a
+          >
+          <a class="text-neutral-300 hover:text-brand-300" href="#contact"
+            >Kontakt</a
+          >
+        </nav>
+
+        <div class="hidden items-center gap-3 md:flex">
+          <a
+            href="#reserve"
+            class="rounded-full border border-neutral-700 px-4 py-1.5 text-sm hover:border-brand-400 hover:text-brand-300 transition-colors"
+            >Rezervo tavolinë</a
+          >
+          <a
+            href="#order"
+            class="rounded-full bg-brand-500 px-4 py-1.5 text-sm text-white shadow-md shadow-brand-500/30 hover:bg-brand-400 transition-colors"
+            >Porosit online</a
+          >
+        </div>
+
+        <button
+          id="mobileMenuBtn"
+          class="md:hidden inline-flex items-center justify-center rounded-xl border border-neutral-700 px-3 py-2 text-sm text-neutral-200 hover:border-brand-400"
+          type="button"
+          aria-controls="mobileDrawer"
+          aria-expanded="false"
+          aria-label="Open menu"
+        >
+          <span class="sr-only">Open menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-neutral-200">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile drawer -->
+      <div id="mobileDrawer" class="fixed inset-0 z-[60] hidden md:hidden" aria-hidden="true">
+        <div id="mobileDrawerOverlay" class="absolute inset-0 bg-black/60"></div>
+        <div
+          class="absolute right-0 top-0 h-full w-[86%] max-w-sm border-l border-neutral-800 bg-neutral-950 p-4"
+        >
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-semibold tracking-[0.25em] uppercase">Menu</span>
+            <button
+              id="mobileDrawerCloseBtn"
+              class="inline-flex items-center justify-center rounded-xl border border-neutral-700 px-3 py-2 text-sm text-neutral-200 hover:border-brand-400"
+              type="button"
+              aria-label="Close menu"
+            >
+              <span class="sr-only">Close menu</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <nav class="mt-6 grid gap-2 text-sm">
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#home">Home</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#menu">Menu</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#order">Porosi</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#services">Shërbime</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#about">Rreth Nesh</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#gallery">Galeri</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#contact">Kontakt</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#reserve">Rezervim</a>
+            <a class="rounded-xl px-3 py-3 text-neutral-200 hover:bg-neutral-900" href="#admin">Admin</a>
+          </nav>
+
+          <div class="mt-6 grid gap-3">
+            <a
+              href="#reserve"
+              class="rounded-full border border-neutral-700 px-5 py-2 text-sm text-neutral-100 hover:border-brand-400 hover:text-brand-300"
+              >Rezervo tavolinë</a
+            >
+            <a
+              href="#order"
+              class="rounded-full bg-brand-500 px-5 py-2 text-sm text-white shadow-md shadow-brand-500/30 hover:bg-brand-400"
+              >Porosit online</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="mx-auto max-w-6xl px-4 py-10 md:py-16">
+      <div
+        class="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] md:items-center"
+      >
+        <div>
+          <p
+            class="text-xs uppercase tracking-[0.35em] text-brand-400"
+            id="heroKicker"
+          >
+            Restorant Modern
+          </p>
+          <h1
+            class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl"
+            id="heroTitle"
+          >
+            Gastronomi moderne në zemër të qytetit.
+          </h1>
+          <p class="mt-4 max-w-xl text-sm leading-relaxed text-neutral-300 md:text-base" id="heroSubtitle">
+            Menu sezonale, verëra të zgjedhura dhe ambient i ngrohtë. Rezervo
+            tavolinën ose porosit ushqimin në shtëpi.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#reserve"
+              class="rounded-full bg-brand-500 px-6 py-2 text-sm font-medium text-white shadow-md shadow-brand-500/30 hover:bg-brand-400 transition-colors"
+              >Rezervo</a
+            >
+            <a
+              href="#menu"
+              class="rounded-full border border-neutral-700 px-6 py-2 text-sm font-medium text-neutral-100 hover:border-brand-400 hover:text-brand-300 transition-colors"
+              >Shiko menunë</a
+            >
+            <a
+              href="#order"
+              class="rounded-full border border-neutral-700 px-6 py-2 text-sm font-medium text-neutral-100 hover:border-brand-400 hover:text-brand-300 transition-colors"
+              >Porosit</a
+            >
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 gap-4 text-xs text-neutral-400 md:grid-cols-3 md:text-sm">
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-4">
+              <p class="font-medium text-neutral-200">Orari</p>
+              <p id="hoursLine1">Hën–Enj: 18:00–23:00</p>
+              <p id="hoursLine2">Pre–Sht: 18:00–00:00</p>
+              <p id="hoursLine3">Die: Mbyllur</p>
+            </div>
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-4">
+              <p class="font-medium text-neutral-200">Adresa</p>
+              <p id="contactAddress">123 Culinary Street, Gourmet City</p>
+            </div>
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-4">
+              <p class="font-medium text-neutral-200">Kontakt</p>
+              <p id="contactPhone">+1 (555) 123-4567</p>
+              <p id="contactEmail">hello@gastronomia.example</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative h-64 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 md:h-[420px]">
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top,_#d46a2a_0,_transparent_60%),radial-gradient(circle_at_bottom,_#0ea5e9_0,_transparent_60%)]"
+          ></div>
+          <div class="absolute inset-6 rounded-3xl border border-white/10 bg-neutral-950/40 backdrop-blur">
+            <div class="flex h-full flex-col justify-between p-6">
+              <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">
+                  Chef’s table
+                </p>
+                <p class="mt-2 text-lg font-medium text-neutral-50">
+                  Eksperiencë degustimi me vende të kufizuara.
+                </p>
+              </div>
+              <div class="text-xs text-neutral-300">
+                <p>Rezervo për raste të veçanta.</p>
+                <p class="mt-1 text-neutral-400">Pairing vere · 8 kurse</p>
+                <div class="mt-4">
+                  <button
+                    id="chefsTableReserveBtn"
+                    type="button"
+                    class="rounded-full border border-neutral-700 px-4 py-2 text-xs font-medium text-neutral-100 hover:border-brand-400 hover:text-brand-300 transition-colors"
+                  >
+                    Rezervo Chef’s table
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Menu</h2>
+          <p class="mt-2 max-w-2xl text-sm text-neutral-300 md:text-base">
+            Zgjidh nga kategoritë dhe shto në shportë për porosi online.
+          </p>
+        </div>
+        <a
+          href="#order"
+          class="hidden rounded-full bg-brand-500 px-5 py-2 text-sm font-medium text-white shadow-md shadow-brand-500/30 hover:bg-brand-400 transition-colors md:inline-block"
+          >Shko te porosia</a
+        >
+      </div>
+
+      <div id="menuRoot" class="mt-8 space-y-10"></div>
+    </section>
+
+    <!-- ORDER -->
+    <section id="order" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Porosit online</h2>
+      <p class="mt-2 max-w-2xl text-sm text-neutral-300 md:text-base">
+        Plotëso të dhënat dhe dërgo porosinë. Për këtë version, porosia ruhet në
+        admin (localStorage) dhe mund të dërgohet edhe me email/telefon.
+      </p>
+
+      <div class="mt-8 grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <section class="space-y-4">
+          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5">
+            <h3 class="text-sm font-semibold text-neutral-50">Të dhënat</h3>
+            <form id="orderForm" class="mt-4 space-y-4">
+              <div class="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label class="text-xs font-medium text-neutral-200">Emri</label>
+                  <input class="mt-1 w-full" name="name" required placeholder="Emri dhe mbiemri" />
+                </div>
+                <div>
+                  <label class="text-xs font-medium text-neutral-200">Telefon</label>
+                  <input class="mt-1 w-full" name="phone" required placeholder="+383..." />
+                </div>
+              </div>
+              <div class="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label class="text-xs font-medium text-neutral-200">Email (opsionale)</label>
+                  <input class="mt-1 w-full" name="email" type="email" placeholder="you@example.com" />
+                </div>
+                <div>
+                  <label class="text-xs font-medium text-neutral-200">Mënyra</label>
+                  <select class="mt-1 w-full" name="mode">
+                    <option value="pickup">Pickup</option>
+                    <option value="delivery">Delivery</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Adresa (vetëm delivery)</label>
+                <input class="mt-1 w-full" name="address" placeholder="Rruga, numri, qyteti" />
+              </div>
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Shënime</label>
+                <textarea class="mt-1 w-full resize-none" rows="3" name="notes" placeholder="Alergji, preferenca, etj."></textarea>
+              </div>
+              <button
+                class="rounded-full bg-brand-500 px-6 py-2 text-sm font-medium text-white shadow-md shadow-brand-500/30 hover:bg-brand-400 transition-colors disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:shadow-none"
+                type="submit"
+                id="submitOrderBtn"
+              >
+                Dërgo porosinë
+              </button>
+              <p class="text-xs text-neutral-400" id="orderStatus"></p>
+            </form>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5">
+            <h3 class="text-sm font-semibold text-neutral-50">Shto diçka në shportë</h3>
+            <p class="mt-1 text-xs text-neutral-400">
+              Mund të shtosh artikuj nga “Menu”, ose të shkruash një artikull të veçantë këtu.
+            </p>
+
+            <form id="quickAddForm" class="mt-4 grid gap-3 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Emri</label>
+                <input class="mt-1 w-full" name="name" placeholder="p.sh. Pizza Margarita" required />
+              </div>
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Çmimi</label>
+                <input class="mt-1 w-full" name="price" type="number" step="0.01" min="0" placeholder="p.sh. 6.50" required />
+              </div>
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Sasia</label>
+                <input class="mt-1 w-full" name="qty" type="number" min="1" max="99" value="1" required />
+              </div>
+              <div class="md:pt-6">
+                <button
+                  class="w-full rounded-full border border-neutral-700 px-5 py-2 text-sm hover:border-brand-400 hover:text-brand-300 transition-colors"
+                  type="submit"
+                >
+                  Shto
+                </button>
+              </div>
+            </form>
+            <p class="mt-2 text-xs text-neutral-400" id="quickAddStatus"></p>
+          </div>
+        </section>
+
+        <aside class="space-y-4 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5">
+          <div class="flex items-center justify-between gap-3">
+            <h3 class="text-sm font-semibold text-neutral-50">Shporta</h3>
+            <button id="clearCartBtn" class="text-xs text-neutral-300 hover:text-brand-300" type="button">
+              Pastro
+            </button>
+          </div>
+          <div id="cartList" class="space-y-3 text-sm"></div>
+          <div class="border-t border-neutral-800 pt-3 text-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-300">Totali</span>
+              <span class="text-base font-semibold text-brand-200" id="cartTotal">$0.00</span>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-400">
+            Pagesa: në restorant (për momentin).
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Shërbimet</h2>
+      <p class="mt-2 max-w-2xl text-sm text-neutral-300 md:text-base">
+        Për darka intime, evente private dhe catering — sipas nevojës tuaj.
+      </p>
+      <div id="servicesGrid" class="mt-8 grid gap-6 md:grid-cols-3"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <div class="grid gap-10 md:grid-cols-2 md:items-start">
+        <div>
+          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Rreth Nesh</h2>
+          <p class="mt-4 text-sm leading-relaxed text-neutral-300 md:text-base" id="aboutText1">
+            Gastronomia lindi nga një ide e thjeshtë: të sjellim një eksperiencë
+            bashkëkohore me mikpritje të ngrohtë dhe shije të balancuara.
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-neutral-300 md:text-base" id="aboutText2">
+            Menuja jonë ndryshon me stinët, duke theksuar përbërësit lokalë dhe
+            teknikat moderne të kuzhinës.
+          </p>
+        </div>
+        <div class="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6">
+          <p class="text-xs uppercase tracking-[0.35em] text-neutral-400">Highlights</p>
+          <ul class="mt-4 space-y-3 text-sm text-neutral-300">
+            <li class="flex gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-brand-400"></span>
+              <span>Menu sezonale dhe degustim i kuruar</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-brand-400"></span>
+              <span>Koleksion i zgjedhur verërash</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-brand-400"></span>
+              <span>Ambient modern, i përshtatshëm për evente</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESERVE -->
+    <section id="reserve" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Rezervo tavolinë</h2>
+      <p class="mt-2 max-w-2xl text-sm text-neutral-300 md:text-base">
+        Plotëso formën për kërkesë rezervimi. Kërkesat ruhen te admin.
+      </p>
+      <div class="mt-6 max-w-3xl rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5">
+        <form id="reserveForm" class="space-y-4">
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Emri</label>
+              <input class="mt-1 w-full" name="name" required placeholder="Emri dhe mbiemri" />
+            </div>
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Telefon</label>
+              <input class="mt-1 w-full" name="phone" required placeholder="+383..." />
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Lloji i rezervimit</label>
+              <select class="mt-1 w-full" name="type" id="reserveTypeSelect">
+                <option value="standard">Tavolinë standard</option>
+                <option value="chefs_table">Chef’s table</option>
+              </select>
+            </div>
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/30 p-3 text-xs text-neutral-300">
+              Chef’s table ka vende të kufizuara — rekomandohet rezervim më herët.
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Data</label>
+              <input class="mt-1 w-full" type="date" name="date" required />
+            </div>
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Ora</label>
+              <input class="mt-1 w-full" type="time" name="time" required />
+            </div>
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Persona</label>
+              <input class="mt-1 w-full" type="number" min="1" max="20" name="guests" value="2" required />
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-medium text-neutral-200">Shënime</label>
+            <textarea class="mt-1 w-full resize-none" rows="3" name="notes" placeholder="Alergji, rast i veçantë, etj."></textarea>
+          </div>
+          <button
+            class="rounded-full bg-brand-500 px-6 py-2 text-sm font-medium text-white shadow-md shadow-brand-500/30 hover:bg-brand-400 transition-colors"
+            type="submit"
+          >
+            Dërgo kërkesën
+          </button>
+          <p class="text-xs text-neutral-400" id="reserveStatus"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Galeri</h2>
+      <p class="mt-2 max-w-2xl text-sm text-neutral-300 md:text-base">
+        Foto të ambientit dhe ushqimeve.
+      </p>
+      <div id="galleryGrid" class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mx-auto max-w-6xl px-4 pb-10 md:pb-16">
+      <div class="grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Kontakt</h2>
+          <p class="mt-2 max-w-xl text-sm text-neutral-300 md:text-base">
+            Na kontaktoni për rezervime, evente private ose pyetje.
+          </p>
+          <form id="contactForm" class="mt-6 space-y-4">
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Emri</label>
+              <input class="mt-1 w-full" name="name" required placeholder="Emri dhe mbiemri" />
+            </div>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Email</label>
+                <input class="mt-1 w-full" name="email" type="email" required placeholder="you@example.com" />
+              </div>
+              <div>
+                <label class="text-xs font-medium text-neutral-200">Telefon</label>
+                <input class="mt-1 w-full" name="phone" placeholder="+383..." />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-medium text-neutral-200">Mesazhi</label>
+              <textarea class="mt-1 w-full resize-none" rows="4" name="message" required placeholder="Si mund t’ju ndihmojmë?"></textarea>
+            </div>
+            <button
+              class="rounded-full bg-brand-500 px-6 py-2 text-sm font-medium text-white shadow-md shadow-brand-500/30 hover:bg-brand-400 transition-colors"
+              type="submit"
+            >
+              Dërgo
+            </button>
+            <p class="text-xs text-neutral-400" id="contactStatus"></p>
+          </form>
+        </div>
+
+        <div class="space-y-4">
+          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-4 text-sm text-neutral-300">
+            <p class="font-medium text-neutral-100">Detajet</p>
+            <p class="mt-2"><span class="text-neutral-400">Adresa:</span> <span id="contactAddress2">123 Culinary Street, Gourmet City</span></p>
+            <p class="mt-1"><span class="text-neutral-400">Telefon:</span> <span id="contactPhone2">+1 (555) 123-4567</span></p>
+            <p class="mt-1"><span class="text-neutral-400">Email:</span> <span id="contactEmail2">hello@gastronomia.example</span></p>
+            <div class="mt-4 flex flex-wrap gap-3 text-sm">
+              <a id="socialInstagram" class="text-neutral-200 hover:text-brand-300" href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+              <a id="socialFacebook" class="text-neutral-200 hover:text-brand-300" href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+              <a id="socialTikTok" class="text-neutral-200 hover:text-brand-300" href="https://tiktok.com" target="_blank" rel="noreferrer">TikTok</a>
+            </div>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-neutral-800">
+            <iframe
+              title="Restaurant location"
+              id="mapsIframe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95565131531845!3d-37.81732797975153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ5JzAyLjQiUyAxNDTCsDU3JzIyLjQiRQ!5e0!3m2!1sen!2s!4v1610000000000!5m2!1sen!2s"
+              width="100%"
+              height="280"
+              style="border: 0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin" class="mx-auto max-w-6xl px-4 pb-16">
+      <div class="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 class="text-2xl font-semibold tracking-tight">Admin Panel</h2>
+            <p class="mt-1 text-sm text-neutral-300">
+              Menaxho menunë, shërbimet, galerinë, porositë dhe rezervimet.
+              (Ruhet në këtë pajisje me localStorage.)
+            </p>
+          </div>
+          <button id="adminLoginBtn" class="rounded-full border border-neutral-700 px-5 py-2 text-sm hover:border-brand-400 hover:text-brand-300">
+            Hyr si admin
+          </button>
+        </div>
+
+        <div id="adminLocked" class="mt-6 text-sm text-neutral-300">
+          Admin është i mbyllur. Kliko “Hyr si admin”.
+        </div>
+
+        <div id="adminArea" class="hidden mt-6">
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/40 p-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold">Porositë</h3>
+                <div class="flex items-center gap-3">
+                  <button id="clearOrdersBtn" class="text-xs text-neutral-300 hover:text-brand-300">Pastro</button>
+                  <button id="logoutAdminBtn" class="text-xs text-neutral-300 hover:text-brand-300">Dil</button>
+                </div>
+              </div>
+              <div id="ordersList" class="mt-3 space-y-3 text-sm"></div>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/40 p-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold">Rezervimet</h3>
+                <button id="clearReservationsBtn" class="text-xs text-neutral-300 hover:text-brand-300">Pastro</button>
+              </div>
+              <div id="reservationsList" class="mt-3 space-y-3 text-sm"></div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/40 p-4">
+              <h3 class="text-sm font-semibold">Edito tekstet</h3>
+              <form id="siteContentForm" class="mt-4 space-y-3">
+                <div>
+                  <label class="text-xs text-neutral-300">Titulli (Hero)</label>
+                  <input class="mt-1 w-full" name="heroTitle" />
+                </div>
+                <div>
+                  <label class="text-xs text-neutral-300">Nëntitulli (Hero)</label>
+                  <textarea class="mt-1 w-full resize-none" rows="3" name="heroSubtitle"></textarea>
+                </div>
+                <div class="grid gap-3 md:grid-cols-2">
+                  <div>
+                    <label class="text-xs text-neutral-300">Telefon</label>
+                    <input class="mt-1 w-full" name="phone" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-neutral-300">Email</label>
+                    <input class="mt-1 w-full" name="email" />
+                  </div>
+                </div>
+                <div>
+                  <label class="text-xs text-neutral-300">Adresa</label>
+                  <input class="mt-1 w-full" name="address" />
+                </div>
+                <div class="grid gap-3 md:grid-cols-3">
+                  <div>
+                    <label class="text-xs text-neutral-300">Orari 1</label>
+                    <input class="mt-1 w-full" name="hoursLine1" placeholder="Hën–Enj: 18:00–23:00" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-neutral-300">Orari 2</label>
+                    <input class="mt-1 w-full" name="hoursLine2" placeholder="Pre–Sht: 18:00–00:00" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-neutral-300">Orari 3</label>
+                    <input class="mt-1 w-full" name="hoursLine3" placeholder="Die: Mbyllur" />
+                  </div>
+                </div>
+                <div>
+                  <label class="text-xs text-neutral-300">Google Maps (embed URL)</label>
+                  <input class="mt-1 w-full" name="mapsEmbedUrl" placeholder="https://www.google.com/maps/embed?pb=..." />
+                </div>
+                <div class="grid gap-3 md:grid-cols-3">
+                  <div>
+                    <label class="text-xs text-neutral-300">Instagram</label>
+                    <input class="mt-1 w-full" name="instagram" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-neutral-300">Facebook</label>
+                    <input class="mt-1 w-full" name="facebook" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-neutral-300">TikTok</label>
+                    <input class="mt-1 w-full" name="tiktok" />
+                  </div>
+                </div>
+                <button class="rounded-full bg-brand-500 px-5 py-2 text-sm font-medium text-white hover:bg-brand-400" type="submit">
+                  Ruaj
+                </button>
+                <p class="text-xs text-neutral-400" id="siteContentStatus"></p>
+              </form>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/40 p-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold">Menu (CRUD)</h3>
+                <button id="resetDataBtn" class="text-xs text-neutral-300 hover:text-brand-300">Rikthe default</button>
+              </div>
+              <form id="menuItemForm" class="mt-4 space-y-3">
+                <div class="grid gap-3 md:grid-cols-2">
+                  <div>
+                    <label class="text-xs text-neutral-300">Kategoria</label>
+                    <select class="mt-1 w-full" name="category" id="menuCategorySelect"></select>
+                  </div>
+                  <div>
+                    <label class="text-xs text-neutral-300">Çmimi</label>
+                    <input class="mt-1 w-full" name="price" type="number" step="0.01" min="0" required />
+                  </div>
+                </div>
+                <div>
+                  <label class="text-xs text-neutral-300">Emri</label>
+                  <input class="mt-1 w-full" name="name" required />
+                </div>
+                <div>
+                  <label class="text-xs text-neutral-300">Përshkrimi</label>
+                  <input class="mt-1 w-full" name="description" />
+                </div>
+                <div class="flex items-center justify-between">
+                  <label class="inline-flex items-center gap-2 text-xs text-neutral-300">
+                    <input type="checkbox" name="available" checked />
+                    Në dispozicion
+                  </label>
+                  <button class="rounded-full border border-neutral-700 px-4 py-2 text-xs hover:border-brand-400 hover:text-brand-300" type="submit">
+                    Shto artikull
+                  </button>
+                </div>
+              </form>
+
+              <div class="mt-4">
+                <h4 class="text-xs uppercase tracking-[0.3em] text-neutral-400">Artikujt</h4>
+                <div id="adminMenuList" class="mt-3 space-y-2 text-sm"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/40 p-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold">Mesazhet (Kontakt)</h3>
+                <button id="clearContactsBtn" class="text-xs text-neutral-300 hover:text-brand-300">Pastro</button>
+              </div>
+              <div id="contactsList" class="mt-3 space-y-3 text-sm"></div>
+            </div>
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-950/40 p-4">
+              <h3 class="text-sm font-semibold">Menaxhim i shpejtë</h3>
+              <p class="mt-2 text-sm text-neutral-300">
+                Këtu mund të aprovosësh/anulosh rezervime, të shënosh mesazhe si të lexuara, dhe të menaxhosh menunë.
+              </p>
+              <p class="mt-3 text-xs text-neutral-400">
+                Shënim: Ky admin punon me localStorage (në këtë pajisje). Për multi-user/online duhet backend.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-neutral-800 bg-neutral-950">
+      <div class="mx-auto max-w-6xl px-4 py-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <p class="text-sm text-neutral-400">
+          © <span id="year"></span> Gastronomia. Të gjitha të drejtat e rezervuara.
+        </p>
+        <div class="flex flex-wrap gap-3 text-sm text-neutral-300">
+          <a href="#admin" class="hover:text-brand-300">Admin</a>
+          <a id="footerInstagram" href="https://instagram.com" target="_blank" rel="noreferrer" class="hover:text-brand-300">Instagram</a>
+          <a id="footerFacebook" href="https://facebook.com" target="_blank" rel="noreferrer" class="hover:text-brand-300">Facebook</a>
+          <a id="footerTikTok" href="https://tiktok.com" target="_blank" rel="noreferrer" class="hover:text-brand-300">TikTok</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ====== Storage keys ======
+      const STORAGE_KEYS = {
+        data: "gastronomia:data:v1",
+        orders: "gastronomia:orders:v1",
+        reservations: "gastronomia:reservations:v1",
+        contacts: "gastronomia:contacts:v1",
+        adminAuthed: "gastronomia:admin:authed:v1",
+        site: "gastronomia:site:v1"
+      };
+
+      // ====== Default data ======
+      const DEFAULT_DATA = {
+        categories: [
+          { id: "starters", name: "Antipasta" },
+          { id: "mains", name: "Kryesore" },
+          { id: "desserts", name: "Ëmbëlsira" },
+          { id: "drinks", name: "Pije" }
+        ],
+        menuItems: [
+          {
+            id: "burrata",
+            categoryId: "starters",
+            name: "Burrata me domate",
+            description: "Burrata kremoze, vaj borziloku, balsamike.",
+            price: 14.0,
+            available: true
+          },
+          {
+            id: "seabass",
+            categoryId: "mains",
+            name: "Fileto levreku",
+            description: "Salcë limoni, finok, limon i pjekur.",
+            price: 28.0,
+            available: true
+          },
+          {
+            id: "tiramisu",
+            categoryId: "desserts",
+            name: "Tiramisu",
+            description: "Klasike, krem maskarpone, kakao.",
+            price: 8.5,
+            available: true
+          },
+          {
+            id: "sparkling",
+            categoryId: "drinks",
+            name: "Ujë me gaz",
+            description: "0.75L",
+            price: 3.5,
+            available: true
+          }
+        ],
+        services: [
+          {
+            id: "fineDining",
+            title: "Fine dining",
+            description: "Ambient elegant me menu sezonale degustimi."
+          },
+          {
+            id: "privateEvents",
+            title: "Evente private",
+            description: "Menu të personalizuara për festa dhe takime biznesi."
+          },
+          {
+            id: "catering",
+            title: "Catering",
+            description: "Kuzhinë e nivelit restoranti në lokacionin tuaj."
+          }
+        ],
+        gallery: [
+          { id: "g1", title: "Ambient", caption: "Salla e restorantit", kind: "INTERIOR" },
+          { id: "g2", title: "Pjatë", caption: "Signature dish", kind: "FOOD" },
+          { id: "g3", title: "Event", caption: "Mbrëmje speciale", kind: "EVENTS" },
+          { id: "g4", title: "Pjatë", caption: "Sezonale", kind: "FOOD" },
+          { id: "g5", title: "Ambient", caption: "Bar & lounge", kind: "INTERIOR" },
+          { id: "g6", title: "Pjatë", caption: "Ëmbëlsirë", kind: "FOOD" }
+        ]
+      };
+
+      const DEFAULT_SITE = {
+        heroTitle: "Gastronomi moderne në zemër të qytetit.",
+        heroSubtitle:
+          "Menu sezonale, verëra të zgjedhura dhe ambient i ngrohtë. Rezervo tavolinën ose porosit ushqimin në shtëpi.",
+        phone: "+1 (555) 123-4567",
+        email: "hello@gastronomia.example",
+        address: "123 Culinary Street, Gourmet City",
+        hoursLine1: "Hën–Enj: 18:00–23:00",
+        hoursLine2: "Pre–Sht: 18:00–00:00",
+        hoursLine3: "Die: Mbyllur",
+        mapsEmbedUrl:
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95565131531845!3d-37.81732797975153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ5JzAyLjQiUyAxNDTCsDU3JzIyLjQiRQ!5e0!3m2!1sen!2s!4v1610000000000!5m2!1sen!2s",
+        instagram: "https://instagram.com",
+        facebook: "https://facebook.com",
+        tiktok: "https://tiktok.com"
+      };
+
+      // ====== Helpers ======
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+      const readJSON = (key, fallback) => {
+        try {
+          const raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch {
+          return fallback;
+        }
+      };
+      const writeJSON = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+      const money = (n) => `$${Number(n || 0).toFixed(2)}`;
+      const uid = () => Math.random().toString(16).slice(2) + Date.now().toString(16);
+
+      // ====== State ======
+      let data = readJSON(STORAGE_KEYS.data, null) || DEFAULT_DATA;
+      let site = readJSON(STORAGE_KEYS.site, null) || DEFAULT_SITE;
+      let cart = readJSON("gastronomia:cart:v1", []);
+
+      // ====== Render: site content ======
+      function applySiteContent() {
+        $("#heroTitle").textContent = site.heroTitle;
+        $("#heroSubtitle").textContent = site.heroSubtitle;
+
+        $("#contactPhone").textContent = site.phone;
+        $("#contactPhone2").textContent = site.phone;
+        $("#contactEmail").textContent = site.email;
+        $("#contactEmail2").textContent = site.email;
+        $("#contactAddress").textContent = site.address;
+        $("#contactAddress2").textContent = site.address;
+
+        $("#hoursLine1").textContent = site.hoursLine1 || "Hën–Enj: 18:00–23:00";
+        $("#hoursLine2").textContent = site.hoursLine2 || "Pre–Sht: 18:00–00:00";
+        $("#hoursLine3").textContent = site.hoursLine3 || "Die: Mbyllur";
+
+        const maps = $("#mapsIframe");
+        if (maps && site.mapsEmbedUrl) maps.src = site.mapsEmbedUrl;
+
+        $("#socialInstagram").href = site.instagram || "https://instagram.com";
+        $("#socialFacebook").href = site.facebook || "https://facebook.com";
+        $("#socialTikTok").href = site.tiktok || "https://tiktok.com";
+        $("#footerInstagram").href = $("#socialInstagram").href;
+        $("#footerFacebook").href = $("#socialFacebook").href;
+        $("#footerTikTok").href = $("#socialTikTok").href;
+      }
+
+      // ====== Render: menu ======
+      function renderMenu() {
+        const root = $("#menuRoot");
+        root.innerHTML = "";
+
+        for (const cat of data.categories) {
+          const items = data.menuItems.filter((x) => x.categoryId === cat.id);
+          const section = document.createElement("section");
+          section.innerHTML = `
+            <h3 class="text-xl font-semibold text-neutral-50">${cat.name}</h3>
+            <div class="mt-4 divide-y divide-neutral-800 rounded-2xl border border-neutral-800 bg-neutral-900/40">
+              ${items
+                .map((item) => {
+                  const unavailable = !item.available
+                    ? `<p class="mt-1 text-xs uppercase tracking-wide text-red-400">Jo në dispozicion</p>`
+                    : "";
+                  return `
+                    <article class="flex flex-col gap-3 px-4 py-4 md:flex-row md:items-center">
+                      <div class="flex-1">
+                        <div class="flex items-center justify-between gap-3">
+                          <h4 class="text-sm font-medium text-neutral-100 md:text-base">${item.name}</h4>
+                          <p class="text-sm font-semibold text-brand-300">${money(item.price)}</p>
+                        </div>
+                        ${item.description ? `<p class="mt-1 text-sm text-neutral-400">${item.description}</p>` : ""}
+                        ${unavailable}
+                      </div>
+                      <div class="flex gap-3 md:items-center">
+                        <button
+                          class="inline-flex items-center justify-center rounded-full border border-neutral-700 px-4 py-1.5 text-xs font-medium text-neutral-100 hover:border-brand-400 hover:text-brand-300 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                          type="button"
+                          data-add="${item.id}"
+                          ${item.available ? "" : "disabled"}
+                        >
+                          Shto në shportë
+                        </button>
+                      </div>
+                    </article>
+                  `;
+                })
+                .join("")}
+            </div>
+          `;
+          root.appendChild(section);
+        }
+
+        // bind add-to-cart
+        $$("[data-add]").forEach((btn) => {
+          btn.addEventListener("click", () => addToCart(btn.getAttribute("data-add")));
+        });
+      }
+
+      // ====== Cart ======
+      function addToCart(itemId) {
+        const item = data.menuItems.find((x) => x.id === itemId);
+        if (!item || !item.available) return;
+        const existing = cart.find((x) => x.itemId === itemId);
+        if (existing) existing.qty += 1;
+        else cart.push({ itemId, qty: 1 });
+        writeJSON("gastronomia:cart:v1", cart);
+        renderCart();
+      }
+
+      function addCustomToCart(name, price, qty) {
+        const cleanName = String(name || "").trim();
+        const cleanPrice = Number(price);
+        const cleanQty = Math.max(1, Math.min(99, Number(qty) || 1));
+        if (!cleanName || !(cleanPrice >= 0)) return false;
+
+        cart.push({
+          itemId: "custom:" + uid(),
+          qty: cleanQty,
+          isCustom: true,
+          name: cleanName,
+          price: cleanPrice
+        });
+        writeJSON("gastronomia:cart:v1", cart);
+        renderCart();
+        return true;
+      }
+
+      function removeFromCart(itemId) {
+        cart = cart.filter((x) => x.itemId !== itemId);
+        writeJSON("gastronomia:cart:v1", cart);
+        renderCart();
+      }
+
+      function setQty(itemId, qty) {
+        const entry = cart.find((x) => x.itemId === itemId);
+        if (!entry) return;
+        entry.qty = Math.max(1, Math.min(99, Number(qty) || 1));
+        writeJSON("gastronomia:cart:v1", cart);
+        renderCart();
+      }
+
+      function computeTotal() {
+        let total = 0;
+        for (const c of cart) {
+          if (c && c.isCustom) {
+            total += Number(c.price) * Number(c.qty);
+            continue;
+          }
+          const item = data.menuItems.find((x) => x.id === c.itemId);
+          if (!item) continue;
+          total += Number(item.price) * Number(c.qty);
+        }
+        return total;
+      }
+
+      function renderCart() {
+        const list = $("#cartList");
+        if (!cart.length) {
+          list.innerHTML = `<p class="text-sm text-neutral-400">Shporta është bosh.</p>`;
+          $("#cartTotal").textContent = money(0);
+          $("#submitOrderBtn").disabled = true;
+          return;
+        }
+
+        $("#submitOrderBtn").disabled = false;
+        list.innerHTML = cart
+          .map((c) => {
+            const isCustom = !!c.isCustom;
+            const item = isCustom ? null : data.menuItems.find((x) => x.id === c.itemId);
+            const name = isCustom ? c.name : item?.name;
+            const price = isCustom ? Number(c.price) : Number(item?.price);
+            if (!name || !(price >= 0)) return "";
+            return `
+              <div class="flex items-center justify-between gap-3 rounded-xl border border-neutral-800 bg-neutral-950/40 p-3">
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-neutral-100 truncate">${name}${isCustom ? ' <span class="text-xs text-neutral-400">(custom)</span>' : ""}</p>
+                  <p class="text-xs text-neutral-400">${money(price)} secila</p>
+                  <div class="mt-2 flex items-center gap-2">
+                    <label class="text-xs text-neutral-400">Sasia</label>
+                    <input class="w-20" type="number" min="1" max="99" value="${c.qty}" data-qty="${c.itemId}" />
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm font-semibold text-brand-300">${money(price * Number(c.qty))}</p>
+                  <button class="mt-2 text-xs text-neutral-300 hover:text-brand-300" type="button" data-remove="${c.itemId}">
+                    Hiqe
+                  </button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+
+        $("#cartTotal").textContent = money(computeTotal());
+
+        $$("[data-remove]").forEach((btn) => {
+          btn.addEventListener("click", () => removeFromCart(btn.getAttribute("data-remove")));
+        });
+        $$("[data-qty]").forEach((inp) => {
+          inp.addEventListener("change", () => setQty(inp.getAttribute("data-qty"), inp.value));
+        });
+      }
+
+      // ====== Render: services ======
+      function renderServices() {
+        const root = $("#servicesGrid");
+        root.innerHTML = data.services
+          .map(
+            (s) => `
+            <article class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5">
+              <h3 class="text-sm font-semibold text-neutral-50">${s.title}</h3>
+              <p class="mt-2 text-sm text-neutral-300">${s.description}</p>
+            </article>
+          `
+          )
+          .join("");
+      }
+
+      // ====== Render: gallery ======
+      function renderGallery() {
+        const root = $("#galleryGrid");
+        root.innerHTML = data.gallery
+          .map(
+            (g) => `
+            <figure class="group relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60">
+              <div class="aspect-[4/3] bg-neutral-800"></div>
+              <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 text-xs text-neutral-100 opacity-0 transition-opacity group-hover:opacity-100">
+                <div class="font-medium">${g.title}</div>
+                <div class="text-[11px] text-neutral-300">${g.caption || ""}</div>
+              </figcaption>
+            </figure>
+          `
+          )
+          .join("");
+      }
+
+      // ====== Forms -> localStorage ======
+      function pushRecord(key, record) {
+        const arr = readJSON(key, []);
+        arr.unshift(record);
+        writeJSON(key, arr);
+      }
+
+      function updateRecord(key, id, patch) {
+        const arr = readJSON(key, []);
+        const idx = arr.findIndex((x) => x && x.id === id);
+        if (idx === -1) return false;
+        arr[idx] = { ...arr[idx], ...patch };
+        writeJSON(key, arr);
+        return true;
+      }
+
+      function deleteRecord(key, id) {
+        const arr = readJSON(key, []);
+        writeJSON(
+          key,
+          arr.filter((x) => x && x.id !== id)
+        );
+      }
+
+      $("#orderForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        $("#orderStatus").textContent = "";
+        if (!cart.length) {
+          $("#orderStatus").textContent = "Shporta është bosh.";
+          return;
+        }
+
+        const form = e.currentTarget;
+        const fd = new FormData(form);
+        const mode = String(fd.get("mode") || "pickup");
+        const address = String(fd.get("address") || "");
+        if (mode === "delivery" && !address.trim()) {
+          $("#orderStatus").textContent = "Shkruaj adresën për delivery.";
+          return;
+        }
+
+        const items = cart
+          .map((c) => {
+            if (c && c.isCustom) {
+              return {
+                itemId: c.itemId,
+                name: String(c.name || ""),
+                price: Number(c.price),
+                qty: Number(c.qty)
+              };
+            }
+            const item = data.menuItems.find((x) => x.id === c.itemId);
+            if (!item) return null;
+            return {
+              itemId: item.id,
+              name: item.name,
+              price: Number(item.price),
+              qty: Number(c.qty)
+            };
+          })
+          .filter(Boolean);
+
+        const record = {
+          id: uid(),
+          createdAt: new Date().toISOString(),
+          status: "PENDING",
+          customer: {
+            name: String(fd.get("name") || ""),
+            phone: String(fd.get("phone") || ""),
+            email: String(fd.get("email") || "")
+          },
+          mode,
+          address: address.trim(),
+          notes: String(fd.get("notes") || ""),
+          total: computeTotal(),
+          items
+        };
+
+        pushRecord(STORAGE_KEYS.orders, record);
+        cart = [];
+        writeJSON("gastronomia:cart:v1", cart);
+        renderCart();
+        form.reset();
+        $("#orderStatus").textContent =
+          "Porosia u dërgua me sukses. Mund ta shohësh te Admin Panel.";
+      });
+
+      $("#reserveForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        $("#reserveStatus").textContent = "";
+        const form = e.currentTarget;
+        const fd = new FormData(form);
+
+        const date = String(fd.get("date") || "");
+        const time = String(fd.get("time") || "");
+        const record = {
+          id: uid(),
+          createdAt: new Date().toISOString(),
+          status: "PENDING",
+          name: String(fd.get("name") || ""),
+          phone: String(fd.get("phone") || ""),
+          type: String(fd.get("type") || "standard"),
+          date,
+          time,
+          guests: Number(fd.get("guests") || 2),
+          notes: String(fd.get("notes") || "")
+        };
+        pushRecord(STORAGE_KEYS.reservations, record);
+        form.reset();
+        $("#reserveTypeSelect").value = "standard";
+        $("#reserveStatus").textContent =
+          "Kërkesa për rezervim u dërgua. Mund ta shohësh te Admin Panel.";
+      });
+
+      $("#quickAddForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        $("#quickAddStatus").textContent = "";
+        const fd = new FormData(e.currentTarget);
+        const ok = addCustomToCart(fd.get("name"), fd.get("price"), fd.get("qty"));
+        if (!ok) {
+          $("#quickAddStatus").textContent = "Plotëso emrin dhe çmimin korrekt.";
+          return;
+        }
+        e.currentTarget.reset();
+        $("#quickAddStatus").textContent = "U shtua në shportë.";
+        setTimeout(() => ($("#quickAddStatus").textContent = ""), 1500);
+      });
+
+      $("#contactForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        $("#contactStatus").textContent = "";
+        const form = e.currentTarget;
+        const fd = new FormData(form);
+        const record = {
+          id: uid(),
+          createdAt: new Date().toISOString(),
+          name: String(fd.get("name") || ""),
+          email: String(fd.get("email") || ""),
+          phone: String(fd.get("phone") || ""),
+          message: String(fd.get("message") || "")
+        };
+        pushRecord(STORAGE_KEYS.contacts, record);
+        form.reset();
+        $("#contactStatus").textContent = "Mesazhi u dërgua. Faleminderit!";
+      });
+
+      // ====== Admin ======
+      function adminIsAuthed() {
+        return localStorage.getItem(STORAGE_KEYS.adminAuthed) === "1";
+      }
+      function setAdminAuthed(v) {
+        localStorage.setItem(STORAGE_KEYS.adminAuthed, v ? "1" : "0");
+      }
+
+      function renderAdmin() {
+        const orders = readJSON(STORAGE_KEYS.orders, []);
+        const reservations = readJSON(STORAGE_KEYS.reservations, []);
+        const contacts = readJSON(STORAGE_KEYS.contacts, []);
+
+        $("#ordersList").innerHTML = orders.length
+          ? orders
+              .slice(0, 20)
+              .map(
+                (o) => `
+              <div class="rounded-xl border border-neutral-800 bg-neutral-950/40 p-3">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="font-medium text-neutral-100">${o.customer?.name || "—"}</p>
+                  <p class="text-xs text-neutral-400">${new Date(o.createdAt).toLocaleString()}</p>
+                </div>
+                <p class="mt-1 text-xs text-neutral-300">${o.customer?.phone || ""} ${o.customer?.email ? "· " + o.customer.email : ""}</p>
+                <p class="mt-2 text-xs text-neutral-300">Total: <span class="text-brand-300 font-semibold">${money(o.total)}</span> · ${o.mode}</p>
+                <div class="mt-2 text-xs text-neutral-400">
+                  ${(o.items || []).map((it) => `${it.qty}× ${it.name}`).join(" · ")}
+                </div>
+              </div>
+            `
+              )
+              .join("")
+          : `<p class="text-sm text-neutral-400">Nuk ka porosi ende.</p>`;
+
+        $("#reservationsList").innerHTML = reservations.length
+          ? reservations
+              .slice(0, 20)
+              .map(
+                (r) => `
+              <div class="rounded-xl border border-neutral-800 bg-neutral-950/40 p-3">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="font-medium text-neutral-100">${r.name}</p>
+                  <p class="text-xs text-neutral-400">${new Date(r.createdAt).toLocaleString()}</p>
+                </div>
+                <p class="mt-1 text-xs text-neutral-300">${r.phone}</p>
+                <p class="mt-2 text-xs text-neutral-300">${r.date} · ${r.time} · ${r.guests} persona${r.type === "chefs_table" ? " · Chef’s table" : ""}</p>
+                <p class="mt-1 text-xs ${r.status === "CONFIRMED" ? "text-green-300" : r.status === "CANCELLED" ? "text-red-300" : "text-neutral-400"}">Status: ${r.status || "PENDING"}</p>
+                ${r.notes ? `<p class="mt-2 text-xs text-neutral-400">${r.notes}</p>` : ""}
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button class="rounded-full border border-neutral-700 px-3 py-1 text-xs hover:border-brand-400 hover:text-brand-300" type="button" data-res-approve="${r.id}">
+                    Aprovo
+                  </button>
+                  <button class="rounded-full border border-neutral-700 px-3 py-1 text-xs hover:border-red-400 hover:text-red-300" type="button" data-res-cancel="${r.id}">
+                    Anulo
+                  </button>
+                  <button class="rounded-full border border-neutral-700 px-3 py-1 text-xs hover:border-neutral-500 hover:text-neutral-200" type="button" data-res-del="${r.id}">
+                    Fshij
+                  </button>
+                </div>
+              </div>
+            `
+              )
+              .join("")
+          : `<p class="text-sm text-neutral-400">Nuk ka rezervime ende.</p>`;
+
+        $("#contactsList").innerHTML = contacts.length
+          ? contacts
+              .slice(0, 30)
+              .map(
+                (c) => `
+              <div class="rounded-xl border border-neutral-800 bg-neutral-950/40 p-3">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="font-medium text-neutral-100">${c.name || "—"}</p>
+                  <p class="text-xs text-neutral-400">${new Date(c.createdAt).toLocaleString()}</p>
+                </div>
+                <p class="mt-1 text-xs text-neutral-300">${c.email || ""}${c.phone ? " · " + c.phone : ""}</p>
+                <p class="mt-2 text-xs text-neutral-300">${c.message || ""}</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button class="rounded-full border border-neutral-700 px-3 py-1 text-xs hover:border-brand-400 hover:text-brand-300" type="button" data-contact-read="${c.id}">
+                    Shëno si të lexuar
+                  </button>
+                  <button class="rounded-full border border-neutral-700 px-3 py-1 text-xs hover:border-neutral-500 hover:text-neutral-200" type="button" data-contact-del="${c.id}">
+                    Fshij
+                  </button>
+                </div>
+              </div>
+            `
+              )
+              .join("")
+          : `<p class="text-sm text-neutral-400">Nuk ka mesazhe ende.</p>`;
+
+        // Site content form
+        const f = $("#siteContentForm");
+        f.heroTitle.value = site.heroTitle;
+        f.heroSubtitle.value = site.heroSubtitle;
+        f.phone.value = site.phone;
+        f.email.value = site.email;
+        f.address.value = site.address;
+        f.hoursLine1.value = site.hoursLine1 || "";
+        f.hoursLine2.value = site.hoursLine2 || "";
+        f.hoursLine3.value = site.hoursLine3 || "";
+        f.mapsEmbedUrl.value = site.mapsEmbedUrl || "";
+        f.instagram.value = site.instagram;
+        f.facebook.value = site.facebook;
+        f.tiktok.value = site.tiktok;
+
+        // Menu admin
+        $("#menuCategorySelect").innerHTML = data.categories
+          .map((c) => `<option value="${c.id}">${c.name}</option>`)
+          .join("");
+        renderAdminMenuList();
+
+        // Bind admin actions (reservations)
+        $$("[data-res-approve]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-res-approve");
+            updateRecord(STORAGE_KEYS.reservations, id, { status: "CONFIRMED" });
+            renderAdmin();
+          });
+        });
+        $$("[data-res-cancel]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-res-cancel");
+            updateRecord(STORAGE_KEYS.reservations, id, { status: "CANCELLED" });
+            renderAdmin();
+          });
+        });
+        $$("[data-res-del]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-res-del");
+            if (!confirm("Ta fshijmë këtë rezervim?")) return;
+            deleteRecord(STORAGE_KEYS.reservations, id);
+            renderAdmin();
+          });
+        });
+
+        // Bind admin actions (contacts)
+        $$("[data-contact-read]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-contact-read");
+            updateRecord(STORAGE_KEYS.contacts, id, { read: true });
+            renderAdmin();
+          });
+        });
+        $$("[data-contact-del]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-contact-del");
+            if (!confirm("Ta fshijmë këtë mesazh?")) return;
+            deleteRecord(STORAGE_KEYS.contacts, id);
+            renderAdmin();
+          });
+        });
+      }
+
+      function renderAdminMenuList() {
+        const root = $("#adminMenuList");
+        const grouped = data.categories.map((c) => ({
+          cat: c,
+          items: data.menuItems.filter((x) => x.categoryId === c.id)
+        }));
+        root.innerHTML = grouped
+          .map(
+            (g) => `
+          <div class="rounded-xl border border-neutral-800 bg-neutral-950/30 p-3">
+            <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">${g.cat.name}</p>
+            <div class="mt-2 space-y-2">
+              ${
+                g.items.length
+                  ? g.items
+                      .map(
+                        (it) => `
+                    <div class="flex items-center justify-between gap-3">
+                      <div class="min-w-0">
+                        <p class="text-sm text-neutral-100 truncate">${it.name}</p>
+                        <p class="text-xs text-neutral-400">${money(it.price)} · ${it.available ? "Aktiv" : "Jo aktiv"}</p>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <button class="text-xs text-neutral-300 hover:text-brand-300" type="button" data-toggle="${it.id}">
+                          ${it.available ? "Ç’aktivizo" : "Aktivizo"}
+                        </button>
+                        <button class="text-xs text-neutral-300 hover:text-red-300" type="button" data-del="${it.id}">
+                          Fshij
+                        </button>
+                      </div>
+                    </div>
+                  `
+                      )
+                      .join("")
+                  : `<p class="text-sm text-neutral-400">Pa artikuj.</p>`
+              }
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        $$("[data-toggle]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-toggle");
+            const it = data.menuItems.find((x) => x.id === id);
+            if (!it) return;
+            it.available = !it.available;
+            persistData();
+          });
+        });
+        $$("[data-del]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const id = b.getAttribute("data-del");
+            data.menuItems = data.menuItems.filter((x) => x.id !== id);
+            persistData();
+          });
+        });
+      }
+
+      function persistData() {
+        writeJSON(STORAGE_KEYS.data, data);
+        renderMenu();
+        renderServices();
+        renderGallery();
+        renderAdminMenuList();
+      }
+
+      $("#menuItemForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        const item = {
+          id: uid(),
+          categoryId: String(fd.get("category")),
+          name: String(fd.get("name") || "").trim(),
+          description: String(fd.get("description") || "").trim(),
+          price: Number(fd.get("price") || 0),
+          available: fd.get("available") === "on"
+        };
+        if (!item.name || !(item.price >= 0)) return;
+        data.menuItems.unshift(item);
+        persistData();
+        e.currentTarget.reset();
+      });
+
+      $("#siteContentForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        site = {
+          ...site,
+          heroTitle: String(fd.get("heroTitle") || ""),
+          heroSubtitle: String(fd.get("heroSubtitle") || ""),
+          phone: String(fd.get("phone") || ""),
+          email: String(fd.get("email") || ""),
+          address: String(fd.get("address") || ""),
+          hoursLine1: String(fd.get("hoursLine1") || ""),
+          hoursLine2: String(fd.get("hoursLine2") || ""),
+          hoursLine3: String(fd.get("hoursLine3") || ""),
+          mapsEmbedUrl: String(fd.get("mapsEmbedUrl") || ""),
+          instagram: String(fd.get("instagram") || ""),
+          facebook: String(fd.get("facebook") || ""),
+          tiktok: String(fd.get("tiktok") || "")
+        };
+        writeJSON(STORAGE_KEYS.site, site);
+        applySiteContent();
+        $("#siteContentStatus").textContent = "U ruajt me sukses.";
+        setTimeout(() => ($("#siteContentStatus").textContent = ""), 2000);
+      });
+
+      $("#resetDataBtn").addEventListener("click", () => {
+        if (!confirm("T’i rikthejmë të dhënat default?")) return;
+        data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+        site = { ...DEFAULT_SITE };
+        writeJSON(STORAGE_KEYS.data, data);
+        writeJSON(STORAGE_KEYS.site, site);
+        applySiteContent();
+        renderMenu();
+        renderServices();
+        renderGallery();
+        renderAdmin();
+      });
+
+      $("#clearCartBtn").addEventListener("click", () => {
+        cart = [];
+        writeJSON("gastronomia:cart:v1", cart);
+        renderCart();
+      });
+
+      $("#clearOrdersBtn").addEventListener("click", () => {
+        if (!confirm("T’i fshijmë të gjitha porositë?")) return;
+        writeJSON(STORAGE_KEYS.orders, []);
+        renderAdmin();
+      });
+      $("#clearReservationsBtn").addEventListener("click", () => {
+        if (!confirm("T’i fshijmë të gjitha rezervimet?")) return;
+        writeJSON(STORAGE_KEYS.reservations, []);
+        renderAdmin();
+      });
+      $("#clearContactsBtn").addEventListener("click", () => {
+        if (!confirm("T’i fshijmë të gjitha mesazhet?")) return;
+        writeJSON(STORAGE_KEYS.contacts, []);
+        renderAdmin();
+      });
+
+      $("#adminLoginBtn").addEventListener("click", () => {
+        const pass = prompt("Fjalëkalimi admin");
+        if (pass === null) return;
+        if (pass.trim() === "admini1212") {
+          setAdminAuthed(true);
+          unlockAdmin();
+        } else {
+          alert("Fjalëkalim i gabuar.");
+        }
+      });
+
+      $("#logoutAdminBtn").addEventListener("click", () => {
+        setAdminAuthed(false);
+        $("#adminArea").classList.add("hidden");
+        $("#adminLocked").classList.remove("hidden");
+      });
+
+      function unlockAdmin() {
+        $("#adminLocked").classList.add("hidden");
+        $("#adminArea").classList.remove("hidden");
+        renderAdmin();
+      }
+
+      // ====== Mobile nav ======
+      const drawer = $("#mobileDrawer");
+      const overlay = $("#mobileDrawerOverlay");
+      const closeBtn = $("#mobileDrawerCloseBtn");
+
+      function openDrawer() {
+        drawer.classList.remove("hidden");
+        drawer.setAttribute("aria-hidden", "false");
+        document.body.classList.add("mobileDrawerOpen");
+        $("#mobileMenuBtn").setAttribute("aria-expanded", "true");
+      }
+      function closeDrawer() {
+        drawer.classList.add("hidden");
+        drawer.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("mobileDrawerOpen");
+        $("#mobileMenuBtn").setAttribute("aria-expanded", "false");
+      }
+
+      $("#mobileMenuBtn").addEventListener("click", () => {
+        if (drawer.classList.contains("hidden")) openDrawer();
+        else closeDrawer();
+      });
+      overlay.addEventListener("click", closeDrawer);
+      closeBtn.addEventListener("click", closeDrawer);
+      drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeDrawer));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeDrawer();
+      });
+
+      $("#chefsTableReserveBtn").addEventListener("click", () => {
+        const sel = $("#reserveTypeSelect");
+        if (sel) sel.value = "chefs_table";
+        document.querySelector("#reserve").scrollIntoView({ behavior: "smooth" });
+        const dateInput = document.querySelector('#reserveForm input[name="date"]');
+        if (dateInput) setTimeout(() => dateInput.focus(), 350);
+      });
+
+      // ====== Init ======
+      document.getElementById("year").textContent = new Date().getFullYear();
+      applySiteContent();
+      renderMenu();
+      renderServices();
+      renderGallery();
+      renderCart();
+      if (adminIsAuthed()) unlockAdmin();
+    </script>
+  </body>
+</html>

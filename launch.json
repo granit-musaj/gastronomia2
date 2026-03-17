@@ -1,0 +1,21 @@
+{
+
+    
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Open Restaurant Website (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "file://${workspaceFolder}/index.html",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Open Restaurant Website (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "file://${workspaceFolder}/index.html",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
